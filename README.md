@@ -43,32 +43,22 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
 ```
 
+Deploy natively to OpenShift with 
+```shell script
+./mvnw clean package -Pnative -Dquarkus.kubernetes.deploy=true
+```
+
 You can then execute your native executable with: `./target/fresh-start-native-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
 ## Related Guides
 
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and JPA
-- SmallRye Reactive Messaging - AMQP Connector ([guide](https://quarkus.io/guides/amqp)): Connect to AMQP with Reactive Messaging
 - REST Client Classic ([guide](https://quarkus.io/guides/rest-client)): Call REST services
 - RESTEasy Reactive ([guide](https://quarkus.io/guides/resteasy-reactive)): A JAX-RS implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
 - SmallRye Health ([guide](https://quarkus.io/guides/microprofile-health)): Monitor service health
 
 ## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-### Reactive Messaging codestart
-
-Use SmallRye Reactive Messaging
-
-[Related Apache AMQP 1.0 guide section...](https://quarkus.io/guides/amqp)
-
 
 ### REST Client
 
