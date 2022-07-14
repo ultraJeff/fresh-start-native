@@ -2,8 +2,8 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel:22.1-java11-amd64 AS build
 USER root
 # COPY --chown=1001:1001 certs  /tmp/certs
-COPY --chown=1001:1001 settings.xml  /code/
-COPY --chown=1001:1001 .quarkus  $HOME/.quarkus
+# COPY --chown=1001:1001 settings.xml  /code/
+# COPY --chown=1001:1001 .quarkus  $HOME/.quarkus
 
 COPY --chown=1001:1001 mvnw /code/mvnw
 COPY --chown=1001:1001 .mvn /code/.mvn
@@ -15,11 +15,9 @@ COPY --chown=1001:1001 pom.xml /code/
 
 USER 1001
 WORKDIR /code/
-#RUN --mount=type=cache,target=/root/.m2 ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline 
-RUN ./mvnw -B -s /code/settings.xml org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
+RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
 COPY src /code/src
-#RUN --mount=type=cache,target=/root/.m2 ./mvnw -U clean package -Drelease.version=1.0 -Dmaven.test.skip=true
-RUN ./mvnw clean package -Pnative -s /code/settings.xml -Drelease.version=1.0 -Dmaven.test.skip=true  
+RUN ./mvnw clean package -Pnative -Drelease.version=1.0 -Dmaven.test.skip=true  
 
 
 ## Stage 2 : create the docker final image
